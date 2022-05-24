@@ -1,0 +1,629 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
+$fontFamily: 'Open Sans',
+sans-serif;
+$fontSize: 16px;
+$transition: .4s ease;
+$primary: #3177b5;
+$secondary: #33a5b7;
+$tertiary: #080033;
+$black: #000;
+$white: #fff;
+$lightgray: #dfdfdf;
+$gray: #eaeaea;
+$padding: 100px 0;
+
+/*****************
+MIXINS
+*****************/
+@mixin flex($justify, $align, $direction) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+}
+
+@mixin bgImg($height) {
+    height: $height;
+    background-position: center;
+    background-size: cover;
+}
+
+@mixin btn {
+    padding: 10px 40px;
+    cursor: pointer;
+    background: transparent;
+    // znacenje transparent providno
+    border: 2px solid $white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    margin-top: 30px;
+    color: $white;
+    transition: $transition;
+
+    &:hover {
+        color: $secondary;
+        background: $white;
+
+    }
+}
+
+// na ovaj nacin se moze napraviti hr
+@mixin underline($color, $width) {
+    background: $color;
+    display: block;
+    width: $width;
+    height: 2px;
+    content: "";
+    margin: 0 0 20px 0;
+}
+
+/*****************
+BASIC STYLES
+*****************/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $fontFamily;
+    font-size: $fontSize;
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+
+    &:hover {
+        transition: $transition;
+    }
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-size: 3.2rem;
+    font-weight: 400;
+    text-shadow: 0 0 2px $tertiary;
+}
+.borderHeadings{
+    color: $white;
+    border: 2px $white solid;
+    padding: 70px;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 400;
+    span{
+        font-weight: 700;
+    }
+}
+
+/*****************
+TOP BAR STYLE
+*****************/
+.topBar {
+    @include flex(space-between, center, row);
+    padding: 10px 0;
+    font-size: 1.7rem;
+
+    .logo {
+        color: $primary;
+
+        &:hover {
+            opacity: .8;
+        }
+
+        span {
+            font-style: italic;
+            color: $secondary;
+            font-weight: 800;
+        }
+    }
+
+    ul {
+        @include flex(space-between, center, row);
+
+        li {
+            a {
+                background: $primary;
+                margin-left: 40px;
+                width: 40px;
+                height: 40px;
+                display: inline-block;
+                text-align: center;
+                border-radius: 50%;
+                font-size: 1.3rem;
+                line-height: 40px;
+                color: $white; 
+                &:hover {
+                    box-shadow: 0 0 10px $lightgray;
+                    background: $secondary;
+                }
+                @media(max-width:376px){
+                    margin-left: 2px;
+                } 
+            }
+        }
+    }
+}
+
+/*****************
+MAIN HEADER STYLE
+*****************/
+.mainHeader {
+    background-image: linear-gradient(rgba($primary, 0.7), rgba($primary, 0.7)), url(img/header.jpg);
+    @include bgImg(90vh);
+
+    nav {
+        padding-top: 20px;
+        ul {
+            @include flex(flex-end, center, row);
+            @media(max-width:768px){
+                justify-content: center;
+                flex-direction: column;
+            }
+            a {
+                color: $white;
+                font-size: 1.3rem;
+                margin-left: 40px;
+                @media(max-width:376px){
+                margin-left: 0;
+                }
+            }
+        }
+    }
+
+    hgroup {
+        @include flex(center, center, column);
+        height: 70vh;
+        text-align: center;
+        width: 50%;
+        margin: auto;
+        color: $white;
+
+        button {
+            @include btn;
+        }
+        @media(max-width:376px){
+            h1{
+                font-size: 2rem;
+            }
+        }
+    }
+}
+
+/*****************
+CONTACT STYLE
+*****************/
+.contact {
+    @include flex(space-between, center, row);
+    padding: $padding;
+    @media(max-width:768px){
+        flex-direction: column;
+        align-items: flex-start;
+     }  
+
+    article {
+        flex: 1;
+
+        h3 {
+            color: $primary;
+            font-size: 2rem;
+
+            &::after {
+                @include underline($primary, 50px);
+            }
+        }
+
+        p {
+            color: $secondary;
+        }
+    }
+}
+/*****************
+MAP STYLE
+*****************/
+iframe{
+    display: block;
+}
+/*****************
+FOOTER STYLE
+*****************/
+footer{
+    background: $primary;
+    text-align: center;
+    color: $white;
+    padding: 20px;
+}
+/*****************
+SERVICES STYLE
+*****************/
+.services{
+    @include flex(space-between,center,row);
+    text-align: center;
+    color: $white;
+    margin-top: -100px;
+    @media(max-width:376px){
+        margin-top: 0px;
+    }
+    article{
+        flex: 0 0 25%;
+        padding: 40px;
+       
+        @media(max-width:768px){
+            flex: 0 0 50%;
+        }
+        @media(max-width:376px){
+            flex: 0 0 100%;
+        }
+        button{
+            @include btn;
+        }
+        i{
+            font-size: 4rem;
+        }
+        h3{
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+    }
+    article:nth-child(even){
+        background: $secondary;
+    }
+    article:nth-child(odd){
+        background: $primary;
+    }
+}
+/*****************
+ABOUT STYLE
+*****************/
+.about{
+  @include flex(center,center ,row );
+    article:first-child{
+        flex: 0 0 50%;
+        background: $lightgray;
+        padding-left: 10%;
+        padding-right: 5%;
+        height: 50vh;
+        color: $primary;
+        @include flex(center,flex-start,column );
+        @media(max-width:768px){
+           flex: 0 0 100%;
+        }
+        h2 {
+            font-size: 2.5rem;
+            &::after {
+                @include underline($primary, 50px);
+            }
+        }
+        a{
+            margin-top: 20px;
+            color: $primary;
+            &:hover{
+                color: $secondary;
+            }
+        }
+    }
+    article:last-child{
+        flex: 0 0 50%;
+        background-image: linear-gradient(rgba($tertiary, 0.7), rgba($tertiary, 0.7)), url(img/about.jpg);
+        @include bgImg(50vh);
+        @include flex(center,flex-end,column );
+        padding-right: 10%;
+       
+        @media(max-width:768px){
+            flex: 0 0 100%;
+         }
+        @media(max-width:376px){
+            h2{
+                border: none;
+                font-size: 1.9rem;
+                padding-right: 16%;
+            }
+        }
+        
+        h2{
+            @extend .borderHeadings;
+        }
+    }
+}
+/*****************
+TEAM STYLE
+*****************/
+.team{
+    background-image: linear-gradient(rgba($black, 0.7), rgba($black, 0.7)), url(img/team.jpg);
+    @include bgImg(auto);
+    text-align: center;
+    color:$white;
+    padding: $padding;
+    h2{
+        font-size: 2.5rem;
+        &::after{
+            @include underline(white,50px );
+            margin: 0 auto 30px auto;
+        }
+    }
+    p{
+        width: 50%;
+        margin: auto;
+    }
+}
+/*****************
+PEOPLES STYLE
+*****************/
+.peoples{
+    background: $lightgray;
+    text-align: center;
+    color: $white;
+    .container{
+        @include flex(center,center,row );
+        padding-bottom: 100px;
+        article{
+            margin-top: -50px;
+            flex: 0 0 25%;
+            background: $secondary;
+            @media(max-width:768px){
+                margin-top: -10px;
+             }
+            button{
+                @include btn;
+                background: $primary;
+                width: 100%;
+                border: none;
+                @media(max-width:376px){
+                    font-size: 0.5rem;
+                }
+            }
+            img{
+                width: 100%;
+                display: block;
+            }
+            .text{
+                padding: 40px;
+                h3{
+                    font-size: 2.5rem;
+                    &::after{
+                        @include underline($white,150px );
+                        margin:20px auto;
+                    }
+                }
+            }
+        }     
+
+        article:nth-child(odd){
+            background: $primary;
+            button{
+                @include btn;
+                width: 100%;
+                border: none;
+                background: $secondary;
+                @media(max-width:376px){
+                    font-size: 0.5rem;
+                }
+            }
+        }  
+        
+    }
+}
+/*****************
+CONSULTATION STYLE
+*****************/
+.consultation{
+    @include flex(center,center ,row );
+    article:first-child{
+        flex:0 0 50%;
+        padding-left: 10%;
+        background-image: linear-gradient(rgba($tertiary, 0.7), rgba($tertiary, 0.7)), url(img/about2.jpg);
+        @include bgImg(60vh);  
+        @include flex(flex-start,center,row );
+        @media(max-width:768px){
+            flex: 0 0 100%;
+         }  
+        h2{
+            @extend .borderHeadings;
+            text-align: left;
+            padding-right: 130px;
+        }    
+    }
+    article:last-child{
+        flex: 0 0 50%;
+        padding-right: 10%;
+        @include flex(flex-end,center,row );
+        padding-top: 30px;
+        padding-bottom: 30px;
+        @media(max-width:768px){
+            flex: 0 0 100%;
+            padding: 0%;
+            justify-content: center;
+            padding: 20px 0;
+         }  
+        form{
+            width: 70%;
+            @include flex(space-between,center,row );
+            input{
+                border:2px solid $primary;
+                padding: 10px;
+                font-size: 1rem;
+                margin-bottom: 20px;
+                // na ovaj nacin pogadjamo stvari preko typa
+                &[type="text"]{
+                    flex: 0 0 48%;
+                }
+                &[type="email"]{
+                    flex: 0 0 100%;
+                }
+            }
+            textarea{
+                border:2px solid $primary;
+                padding: 10px;
+                font-size: 1rem;
+                flex: 0 0 100%;
+            }
+            button{
+                @include btn;
+                background: $primary;
+                flex: 0 0 100%;
+                border:2px solid $primary;
+            }
+            
+        }
+    }
+}
+/*****************
+TESTIMONIALS STYLE
+*****************/
+.testimonials{
+    background: $tertiary;
+    color: $white;
+    text-align: center;
+    padding: $padding;
+    h2{
+        font-size: 2rem;
+        text-transform: uppercase;
+    }
+    .owl-carousel{
+        width: 50%;
+        margin: auto;
+        p{
+            padding: 30px 0;
+        }
+        h4{
+            margin-bottom: 30px;
+        }
+    }
+}
+/*****************
+TYPES STYLE
+*****************/
+.types{
+    background: $primary;
+    text-align: center;
+    padding: $padding;
+    h2{
+        font-size: 2rem;
+        color: $white;
+        margin-bottom: 20px;
+    }
+    p{
+        font-size: .9rem;
+        font-weight: 600;
+    }
+    .container{
+        @include flex(space-between,center ,row );
+        article{
+            flex: 0 0 24%;
+            margin-top: 20px;
+            background: $white;
+            padding: 10px;
+            @media(max-width:768px){
+                flex: 0 0 100%;
+            }
+            &:hover{
+                background: $tertiary;
+                p{
+                    color: $white;
+                }
+            }
+            h3{
+                font-size: 1.5rem;
+                color: $primary;
+                margin-bottom: 20px;
+                &::after{
+                    @include underline($primary,50px);
+                    margin: auto;
+                }
+            }
+            p{
+                padding: 10px 0;
+                padding-bottom: 20px;
+            }
+        }
+    }
+    
+}
+/*****************
+BLOG STYLE
+*****************/
+.blog{
+    background: $lightgray;
+    .container{
+        padding: $padding;
+        @include flex(space-between,center ,row );
+        article:first-child{
+            flex: 0 0 69%;
+            @include flex(space-between,center ,row );
+            @media(max-width:768px){
+                flex: 0 0 100%;
+             }
+            .post{
+                margin-bottom: 20px;
+                @include flex(space-between,flex-start ,row );
+                flex: 0 0 100%;
+                .image{
+                    flex: 0 0 48%;
+                    @media(max-width:768px){
+                        flex: 0 0 100%;
+                     }
+                    img{
+                        width: 100%;
+                    }
+                }
+                .text{
+                    flex: 0 0 50%;
+                    @media(max-width:768px){
+                        flex: 0 0 100%;
+                     }
+                    h5{
+                        background: $primary;
+                        font-size: 1rem;
+                        color: $white;
+                    }
+                    h6{
+                        font-size: .9rem;
+                        margin-top: 10px;
+                    }
+                    p{
+                        font-size: 0.8rem;
+                        margin-top: 20px;
+                        margin-bottom: 30px;
+                    }
+
+                    a{
+                        color: $primary;
+
+                    }
+                }
+            }
+        }
+        article:last-child{
+            flex: 0 0 29%;
+            height: 587px;
+            @media(max-width:768px){
+                flex: 0 0 100%;
+             }
+            hgroup{
+                background: $primary;
+                padding: 30px;
+                color: $white;
+                h6{
+                    font-size: 1.5rem;
+                    color: $black;
+                }
+            }
+        }
+
+    }
+}
